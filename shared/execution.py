@@ -21,6 +21,7 @@ class ResultatAgent:
     latence_s: float = 0.0
     appels_outils: list[dict] = field(default_factory=list)
     etat: dict = field(default_factory=dict)
+    repli: bool = False  # vrai si le modèle de secours a répondu
 
 
 async def executer_agent(agent: BaseAgent, parts: list[types.Part], etat_initial: dict | None = None) -> ResultatAgent:

@@ -1,4 +1,4 @@
-.PHONY: install web run-local services test conversation data
+.PHONY: install web run-local services test eval eval-rapide conversation data
 
 install:      ## Crée .venv (Python 3.12) et installe les dépendances
 	uv sync
@@ -15,10 +15,16 @@ services:     ## Services A2A + MCP seulement (pour l'éval en mode distribué)
 test:         ## Tests unitaires (règles, outils, juge, données), sans LLM
 	uv run pytest
 
+eval:         ## Jeu d'évaluation complet (65 cas, section 9) ; rapport dans eval/resultats/
+	uv run python eval/run_eval.py
+
+eval-rapide:  ## Deux cas par jeu, pour vérifier que tout tourne
+	uv run python eval/run_eval.py --limite 2
+
 conversation: ## Conversation de démo en ligne de commande
 	uv run python scripts/conversation.py "ma tente a un arceau cassé et une petite déchirure, je l'ai depuis 3 ans" "je la répare moi-même" "oui"
 
 data:         ## Régénère les données fictives
 	uv run python scripts/generate_data.py
 
-# À venir : eval (lot 6), deploy (lot 7)
+# À venir : deploy (lot 7)

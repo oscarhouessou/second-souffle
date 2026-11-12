@@ -20,3 +20,7 @@ htmlcov/
 
 # Logs des services locaux
 .logs/
+
+# Évaluation : seul le dernier rapport est versionné
+eval/resultats/*
+!eval/resultats/dernier-rapport.md

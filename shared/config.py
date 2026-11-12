@@ -23,7 +23,14 @@ def model_name_for(role: str) -> str:
     return os.getenv(f"SECOND_SOUFFLE_MODEL_{role.upper()}", DEFAULT_MODEL)
 
 
-def model_for(role: str):
+def model_name_secours(role: str) -> str:
+    """Modèle de repli d'un rôle : l'autre modèle de la paire Flash / Flash-Lite (quota distinct)."""
+    principal = model_name_for(role)
+    return os.getenv("SECOND_SOUFFLE_MODEL_SECOURS",
+                     "gemini-3.6-flash" if "lite" in principal else "gemini-3.5-flash-lite")
+
+
+def model_for(role: str, secours: bool = False):
     """Modèle Gemini d'un rôle, avec nouvelles tentatives sur erreur transitoire (NF04).
 
     429 (quota) et 503 (surcharge) : 2 nouvelles tentatives au plus, délai exponentiel 1 s puis 2 s,
@@ -33,7 +40,7 @@ def model_for(role: str):
     from google.genai import types
 
     return Gemini(
-        model=model_name_for(role),
+        model=model_name_secours(role) if secours else model_name_for(role),
         retry_options=types.HttpRetryOptions(
             attempts=3, initial_delay=1.0, max_delay=8.0, exp_base=2.0, jitter=0.5, http_status_codes=[429, 503]
         ),

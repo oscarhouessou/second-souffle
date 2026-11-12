@@ -45,9 +45,12 @@ from valuation.agent import root_agent as agent_valorisation
 log = logging.getLogger("second_souffle")
 
 
-def _appel(agent: BaseAgent, variable_url: str) -> AppelSpecialiste:
+def _appel(agent: BaseAgent, variable_url: str, role: str | None = None) -> AppelSpecialiste:
     url = os.getenv(variable_url)
-    return AppelSpecialiste(url_carte_a2a=url) if url else AppelSpecialiste(agent_local=agent)
+    if url:
+        return AppelSpecialiste(url_carte_a2a=url)
+    secours = agent.clone(update={"model": model_for(role, secours=True)}) if role else None
+    return AppelSpecialiste(agent_local=agent, agent_secours=secours)
 
 
 # --------------------------------------------------------------------------------------------
@@ -86,7 +89,7 @@ def entree_juge(etat: dict, _ctx) -> list[types.Part]:
 # Construction du graphe d'agents
 # --------------------------------------------------------------------------------------------
 etape_diagnostic = EtapeSpecialiste(
-    name="etape_diagnostic", appel=_appel(agent_diagnostic, "DIAGNOSTIC_AGENT_CARD_URL"),
+    name="etape_diagnostic", appel=_appel(agent_diagnostic, "DIAGNOSTIC_AGENT_CARD_URL", "diagnostic"),
     construire_entree=entree_diagnostic, cle_sortie="fiche", schema_sortie=FicheDiagnostic,
 )
 
@@ -94,11 +97,11 @@ propositions = ParallelAgent(
     name="propositions",
     sub_agents=[
         EtapeSpecialiste(
-            name="etape_reparation", appel=_appel(agent_reparation, "REPAIR_AGENT_CARD_URL"),
+            name="etape_reparation", appel=_appel(agent_reparation, "REPAIR_AGENT_CARD_URL", "repair"),
             construire_entree=entree_fiche, cle_sortie="proposition_reparation", schema_sortie=PropositionReparation,
         ),
         EtapeSpecialiste(
-            name="etape_valorisation", appel=_appel(agent_valorisation, "VALUATION_AGENT_CARD_URL"),
+            name="etape_valorisation", appel=_appel(agent_valorisation, "VALUATION_AGENT_CARD_URL", "valuation"),
             construire_entree=entree_fiche, cle_sortie="proposition_valorisation", schema_sortie=PropositionValorisation,
         ),
     ],
@@ -171,8 +174,12 @@ class Orchestrateur(BaseAgent):
             return
 
         if phase in ("choix", "termine"):
-            async for ev in conseiller.run_async(ctx):
-                yield ev
+            try:
+                async for ev in conseiller.run_async(ctx):
+                    yield ev
+            except Exception as e:
+                log.warning("conseiller en échec : %s", type(e).__name__)
+                yield self._message(ctx, "Le service est très sollicité. Pouvez-vous renvoyer votre message dans un instant ?")
             return
 
         if phase == "escalade":
@@ -213,11 +220,18 @@ class Orchestrateur(BaseAgent):
             return
 
         # --- Fiche complète : propositions, décision, rédaction relue par le juge --------------
-        async for ev in pipeline_conseil.run_async(ctx):
-            if ev.author == redacteur.name and ev.content:
-                # Le brouillon n'est pas montré au client tant que le juge ne l'a pas accepté.
-                ev = ev.model_copy(update={"content": None})
-            yield ev
+        try:
+            async for ev in pipeline_conseil.run_async(ctx):
+                if ev.author == redacteur.name and ev.content:
+                    # Le brouillon n'est pas montré au client tant que le juge ne l'a pas accepté.
+                    ev = ev.model_copy(update={"content": None})
+                yield ev
+        except Exception as e:  # rédacteur en échec (quota, délai) : le message de secours prend le relais
+            log.warning("pipeline de conseil interrompu : %s", type(e).__name__)
+        if not etat.get("recommandation"):
+            yield self._message(ctx, "Le service est très sollicité, je n'ai pas pu préparer vos options. "
+                                     "Pouvez-vous renvoyer votre message dans un instant ?")
+            return
 
         reco = Recommandation.model_validate(etat["recommandation"])
         verdict = etat.get("verdict") or {}

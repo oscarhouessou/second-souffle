@@ -32,14 +32,25 @@ class AppelSpecialiste(BaseModel):
 
     model_config = ConfigDict(arbitrary_types_allowed=True)
     agent_local: BaseAgent | None = None
+    agent_secours: BaseAgent | None = None  # même agent sur un autre modèle (quota distinct)
     url_carte_a2a: str | None = None
 
     async def appeler(self, parts: list[types.Part]) -> ResultatAgent:
         if self.url_carte_a2a:
             from orchestrator.a2a_client import appeler_a2a  # lot 4
 
-            return await appeler_a2a(self.url_carte_a2a, parts)
-        return await executer_agent(self.agent_local, parts)
+            return await asyncio.wait_for(appeler_a2a(self.url_carte_a2a, parts), timeout=TIMEOUT_APPEL_S)
+        if not self.agent_secours:
+            return await asyncio.wait_for(executer_agent(self.agent_local, parts), timeout=TIMEOUT_APPEL_S)
+        # Repli de modèle : les quotas Vertex AI sont comptés par modèle, un 429 sur l'un laisse
+        # souvent passer l'autre. Chaque tentative dispose de 60 % du délai total (NF03).
+        try:
+            return await asyncio.wait_for(executer_agent(self.agent_local, parts), timeout=0.6 * TIMEOUT_APPEL_S)
+        except Exception as e:
+            log.warning("%s : repli sur le modèle de secours (%s)", self.agent_local.name, type(e).__name__)
+            r = await asyncio.wait_for(executer_agent(self.agent_secours, parts), timeout=0.6 * TIMEOUT_APPEL_S)
+            r.repli = True
+            return r
 
 
 class EtapeSpecialiste(BaseAgent):
@@ -56,7 +67,7 @@ class EtapeSpecialiste(BaseAgent):
         parts = self.construire_entree(dict(ctx.session.state), ctx)
         try:
             # NF03 : délai maximal par appel, puis on continue sans ce spécialiste
-            resultat = await asyncio.wait_for(self.appel.appeler(parts), timeout=TIMEOUT_APPEL_S)
+            resultat = await self.appel.appeler(parts)
             valeur = self.schema_sortie.model_validate_json(_json_seul(resultat.texte))
         except Exception as e:  # timeout, réponse invalide, service injoignable
             log.warning("étape %s en échec : %s", self.name, e)
@@ -74,6 +85,7 @@ class EtapeSpecialiste(BaseAgent):
             # Pas de contenu texte : rien ne s'affiche dans le chat, tout est visible dans l'onglet Events.
             custom_metadata={
                 "latence_s": round(resultat.latence_s, 2),
+                "repli_modele": resultat.repli,
                 "appels_outils": resultat.appels_outils,
                 "tokens": [resultat.tokens_entree, resultat.tokens_sortie],
             },

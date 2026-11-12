@@ -1,0 +1,55 @@
+name: CI
+
+on:
+  push:
+    branches: [main, dev-oscar]
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      eval:
+        description: "Lancer aussi l'évaluation complète (appelle Vertex AI)"
+        type: boolean
+        default: false
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.8.11"
+      - run: uv sync --frozen
+      - run: uv run pytest -q
+
+  eval:
+    # Demande une fédération d'identité (Workload Identity) vers le projet GCP : secrets
+    # GCP_WORKLOAD_IDENTITY_PROVIDER et GCP_SERVICE_ACCOUNT, variable GOOGLE_CLOUD_PROJECT.
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.eval }}
+    needs: tests
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    env:
+      GOOGLE_GENAI_USE_VERTEXAI: "TRUE"
+      GOOGLE_CLOUD_PROJECT: ${{ vars.GOOGLE_CLOUD_PROJECT }}
+      GOOGLE_CLOUD_LOCATION: eu
+      SECOND_SOUFFLE_MODEL: gemini-3.5-flash-lite
+      SECOND_SOUFFLE_MODEL_DIAGNOSTIC: gemini-3.6-flash
+    steps:
+      - uses: actions/checkout@v4
+      - uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.8.11"
+      - run: uv sync --frozen
+      - run: uv run python eval/run_eval.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: rapport-eval
+          path: eval/resultats/
