@@ -1,0 +1,13 @@
+# Construit et publie l'image du service « orchestrator » dans Artifact Registry.
+#   gcloud builds submit --config .cloudbuild/orchestrator.yaml --substitutions=_REGION=europe-west1 .
+substitutions:
+  _REGION: europe-west1
+  _REPO: second-souffle
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args: ["build", "-f", "orchestrator/Dockerfile", "-t", "${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/orchestrator:$BUILD_ID", "-t", "${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/orchestrator:latest", "."]
+images:
+  - "${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/orchestrator:$BUILD_ID"
+  - "${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/orchestrator:latest"
+options:
+  logging: CLOUD_LOGGING_ONLY

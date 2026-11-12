@@ -1,0 +1,13 @@
+# Construit et publie l'image du service « diagnostic » dans Artifact Registry.
+#   gcloud builds submit --config .cloudbuild/diagnostic.yaml --substitutions=_REGION=europe-west1 .
+substitutions:
+  _REGION: europe-west1
+  _REPO: second-souffle
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args: ["build", "-f", "diagnostic/Dockerfile", "-t", "${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/diagnostic:$BUILD_ID", "-t", "${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/diagnostic:latest", "."]
+images:
+  - "${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/diagnostic:$BUILD_ID"
+  - "${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/diagnostic:latest"
+options:
+  logging: CLOUD_LOGGING_ONLY

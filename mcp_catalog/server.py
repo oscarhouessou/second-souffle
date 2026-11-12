@@ -10,6 +10,7 @@ transposable, il suffit de remplacer ce serveur pour brancher d'autres données 
 from mcp.server.mcpserver import MCPServer
 
 from shared import outils
+from shared.telemetrie import activer_tracage
 
 serveur = MCPServer(
     name="second-souffle-catalogue",
@@ -21,3 +22,4 @@ for fonction in [*outils.OUTILS_REPARATION, *outils.OUTILS_VALORISATION]:
 
 # Sans état : chaque requête est indépendante, ce qui permet plusieurs instances derrière Cloud Run.
 app = serveur.streamable_http_app(stateless_http=True, json_response=True, host="0.0.0.0")
+activer_tracage(app)

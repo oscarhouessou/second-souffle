@@ -17,4 +17,5 @@ COPY orchestrator/ orchestrator/
 # Les URL des cartes A2A sont passées par variables d'environnement au déploiement.
 # ADK_COMMAND=web sert l'interface de démo ; api_server (défaut) sert seulement l'API.
 ENV ADK_COMMAND=api_server
-CMD ["sh", "-c", "uv run --no-sync adk $ADK_COMMAND --host 0.0.0.0 --port ${PORT:-8080} ."]
+# OTEL_TO_CLOUD=1 : spans ADK exportés vers Cloud Trace et Cloud Logging.
+CMD ["sh", "-c", "uv run --no-sync adk $ADK_COMMAND ${OTEL_TO_CLOUD:+--otel_to_cloud} --host 0.0.0.0 --port ${PORT:-8080} ."]

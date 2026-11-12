@@ -12,13 +12,17 @@ from urllib.parse import urlparse
 from google.adk.a2a.utils.agent_to_a2a import to_a2a
 from google.adk.agents import BaseAgent
 
+from shared.telemetrie import activer_tracage
+
 
 def creer_app(agent: BaseAgent, port_defaut: int):
     port = int(os.getenv("PORT", port_defaut))
     publique = urlparse(os.getenv("PUBLIC_URL", f"http://localhost:{port}"))
-    return to_a2a(
+    app = to_a2a(
         agent,
         host=publique.hostname or "localhost",
         port=publique.port or (443 if publique.scheme == "https" else port),
         protocol=publique.scheme or "http",
     )
+    activer_tracage(app)  # OTEL_TO_CLOUD=1 : spans vers Cloud Trace, contexte repris à l'arrivée
+    return app
