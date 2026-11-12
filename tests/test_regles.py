@@ -104,3 +104,18 @@ def test_au_plus_trois_options_recommandee_en_premier():
     reco = regles.decider(fiche(frequence_usage="ponctuelle"), rep, val)
     assert len(reco.options) <= 3
     assert reco.options[0].option == reco.option_recommandee
+
+
+def test_une_seule_piece_par_defaut_la_moins_chere():
+    """Deux arceaux de remplacement pour un arceau cassé ne s'additionnent pas."""
+    rep = {"reparable": True, "pieces": [{"part_id": "PC-001"}, {"part_id": "PC-003"}]}
+    reco = regles.decider(fiche(), rep, None)
+    soi_meme = next(o for o in reco.options if o.titre == "Réparer vous-même")
+    assert soi_meme.cout_client_eur == 9.99
+
+
+def test_raison_r04_chiffree_quand_la_revente_l_emporte():
+    f = fiche("sac_a_dos", "randonnee", defauts=[{"type": "bretelle_dechiree", "gravite": "moyenne"}])
+    reco = regles.decider(f, {"reparable": True, "pieces": [{"part_id": "PC-016"}]}, None)
+    assert reco.option_recommandee == "revendre"
+    assert "seuil" in reco.raison and "7.99" in reco.raison

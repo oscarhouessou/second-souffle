@@ -159,7 +159,12 @@ def decider(fiche: FicheDiagnostic, reparation: dict | None, valorisation: dict 
     if not est_dangereux(fiche) and not est_securite(cat) and reparation.get("reparable"):
         pieces = [p for pid in [x.get("part_id") for x in reparation.get("pieces", [])] if (p := _par_id(data.pieces(), "part_id", pid))]
         presta = _par_id(data.prestations(), "service_id", reparation.get("service_id"))
-        soi_meme = [p for p in pieces if p.difficulte != "atelier"]
+        # Une seule pièce par défaut : la moins chère (deux arceaux pour un arceau cassé ne s'additionnent pas).
+        par_defaut: dict = {}
+        for p in pieces:
+            if p.difficulte != "atelier" and (p.defaut not in par_defaut or p.prix_eur < par_defaut[p.defaut].prix_eur):
+                par_defaut[p.defaut] = p
+        soi_meme = list(par_defaut.values())
         if soi_meme:
             cout = round(sum(p.prix_eur for p in soi_meme), 2)
             cout_rep = cout
@@ -230,8 +235,15 @@ def decider(fiche: FicheDiagnostic, reparation: dict | None, valorisation: dict 
         recommandee, raison = "revendre", "Vous l'utilisez peu : le revendre puis louer au besoin vous coûte moins cher."
     elif "revendre" in types_dispo:
         recommandee = "revendre"
-        raison = "La réparation n'est pas rentable ou pas possible : la revente vous rapporte le plus." if fiche.defauts else (
-            "Le produit est en bon état et vous ne l'utilisez plus : le revendre lui donne une seconde vie.")
+        if cout_rep is not None:
+            seuil = RATIO_REPARATION_OCCASION * prix_occasion_equivalent(cat, gamme)
+            regles.append("R04")
+            raison = (f"La réparation ({cout_rep:.2f} €) dépasse la moitié du prix d'un équivalent d'occasion "
+                      f"(seuil {seuil:.2f} €) : la revente est plus intéressante.")
+        elif fiche.defauts:
+            raison = "Aucune réparation n'est disponible pour ce défaut : la revente lui donne une seconde vie."
+        else:
+            raison = "Le produit est en bon état : le revendre lui donne une seconde vie."
     elif "occasion" in types_dispo:
         recommandee, raison = "occasion", "Un équivalent d'occasion contrôlé est la solution la moins chère."
     else:
