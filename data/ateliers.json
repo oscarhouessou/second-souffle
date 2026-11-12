@@ -1,0 +1,262 @@
+[
+  {
+    "workshop_id": "AT-01",
+    "nom": "Atelier Second Souffle Lille",
+    "ville": "Lille",
+    "code_postal": "59000",
+    "jours_ouverture": [
+      1,
+      3,
+      4,
+      5,
+      6
+    ],
+    "horaires_creneaux": [
+      "09:30",
+      "11:00",
+      "14:00"
+    ]
+  },
+  {
+    "workshop_id": "AT-02",
+    "nom": "Atelier Second Souffle Villeneuve-d'Ascq",
+    "ville": "Villeneuve-d'Ascq",
+    "code_postal": "59650",
+    "jours_ouverture": [
+      1,
+      3,
+      4,
+      5,
+      6
+    ],
+    "horaires_creneaux": [
+      "09:30",
+      "11:00",
+      "17:00"
+    ]
+  },
+  {
+    "workshop_id": "AT-03",
+    "nom": "Atelier Second Souffle Paris 11e",
+    "ville": "Paris 11e",
+    "code_postal": "75011",
+    "jours_ouverture": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "horaires_creneaux": [
+      "11:00",
+      "14:00",
+      "15:30"
+    ]
+  },
+  {
+    "workshop_id": "AT-04",
+    "nom": "Atelier Second Souffle Paris 15e",
+    "ville": "Paris 15e",
+    "code_postal": "75015",
+    "jours_ouverture": [
+      1,
+      2,
+      4,
+      5
+    ],
+    "horaires_creneaux": [
+      "09:30",
+      "11:00",
+      "14:00"
+    ]
+  },
+  {
+    "workshop_id": "AT-05",
+    "nom": "Atelier Second Souffle Lyon",
+    "ville": "Lyon",
+    "code_postal": "69007",
+    "jours_ouverture": [
+      1,
+      4,
+      5,
+      6
+    ],
+    "horaires_creneaux": [
+      "14:00",
+      "15:30",
+      "17:00"
+    ]
+  },
+  {
+    "workshop_id": "AT-06",
+    "nom": "Atelier Second Souffle Marseille",
+    "ville": "Marseille",
+    "code_postal": "13008",
+    "jours_ouverture": [
+      1,
+      2,
+      4,
+      6
+    ],
+    "horaires_creneaux": [
+      "09:30",
+      "14:00",
+      "15:30"
+    ]
+  },
+  {
+    "workshop_id": "AT-07",
+    "nom": "Atelier Second Souffle Toulouse",
+    "ville": "Toulouse",
+    "code_postal": "31000",
+    "jours_ouverture": [
+      1,
+      2,
+      3,
+      5,
+      6
+    ],
+    "horaires_creneaux": [
+      "09:30",
+      "11:00",
+      "15:30"
+    ]
+  },
+  {
+    "workshop_id": "AT-08",
+    "nom": "Atelier Second Souffle Bordeaux",
+    "ville": "Bordeaux",
+    "code_postal": "33000",
+    "jours_ouverture": [
+      1,
+      2,
+      4
+    ],
+    "horaires_creneaux": [
+      "14:00",
+      "15:30",
+      "17:00"
+    ]
+  },
+  {
+    "workshop_id": "AT-09",
+    "nom": "Atelier Second Souffle Nantes",
+    "ville": "Nantes",
+    "code_postal": "44000",
+    "jours_ouverture": [
+      1,
+      2,
+      3,
+      5
+    ],
+    "horaires_creneaux": [
+      "09:30",
+      "14:00",
+      "17:00"
+    ]
+  },
+  {
+    "workshop_id": "AT-10",
+    "nom": "Atelier Second Souffle Rennes",
+    "ville": "Rennes",
+    "code_postal": "35000",
+    "jours_ouverture": [
+      1,
+      2,
+      4,
+      5,
+      6
+    ],
+    "horaires_creneaux": [
+      "14:00",
+      "15:30",
+      "17:00"
+    ]
+  },
+  {
+    "workshop_id": "AT-11",
+    "nom": "Atelier Second Souffle Strasbourg",
+    "ville": "Strasbourg",
+    "code_postal": "67000",
+    "jours_ouverture": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "horaires_creneaux": [
+      "09:30",
+      "11:00",
+      "14:00"
+    ]
+  },
+  {
+    "workshop_id": "AT-12",
+    "nom": "Atelier Second Souffle Montpellier",
+    "ville": "Montpellier",
+    "code_postal": "34000",
+    "jours_ouverture": [
+      1,
+      2,
+      3,
+      6
+    ],
+    "horaires_creneaux": [
+      "14:00",
+      "15:30",
+      "17:00"
+    ]
+  },
+  {
+    "workshop_id": "AT-13",
+    "nom": "Atelier Second Souffle Nice",
+    "ville": "Nice",
+    "code_postal": "06200",
+    "jours_ouverture": [
+      1,
+      2,
+      3,
+      6
+    ],
+    "horaires_creneaux": [
+      "14:00",
+      "15:30",
+      "17:00"
+    ]
+  },
+  {
+    "workshop_id": "AT-14",
+    "nom": "Atelier Second Souffle Grenoble",
+    "ville": "Grenoble",
+    "code_postal": "38000",
+    "jours_ouverture": [
+      1,
+      2,
+      4,
+      5,
+      6
+    ],
+    "horaires_creneaux": [
+      "09:30",
+      "11:00",
+      "15:30"
+    ]
+  },
+  {
+    "workshop_id": "AT-15",
+    "nom": "Atelier Second Souffle Annecy",
+    "ville": "Annecy",
+    "code_postal": "74000",
+    "jours_ouverture": [
+      1,
+      2,
+      5
+    ],
+    "horaires_creneaux": [
+      "09:30",
+      "11:00",
+      "15:30"
+    ]
+  }
+]

@@ -1,0 +1,552 @@
+[
+  {
+    "product_id": "P-VELO_V-01",
+    "nom": "Vélo de ville cadre bas 6 vitesses",
+    "famille": "velo",
+    "categorie": "velo_ville",
+    "gamme": "entree",
+    "prix_neuf_eur": 199.0,
+    "est_securite": false,
+    "co2_kg": 120.0
+  },
+  {
+    "product_id": "P-VELO_V-02",
+    "nom": "Vélo de ville 7 vitesses moyeu intégré",
+    "famille": "velo",
+    "categorie": "velo_ville",
+    "gamme": "milieu",
+    "prix_neuf_eur": 449.0,
+    "est_securite": false,
+    "co2_kg": 140.0
+  },
+  {
+    "product_id": "P-VELO_V-03",
+    "nom": "Vélo de ville cadre aluminium 8 vitesses",
+    "famille": "velo",
+    "categorie": "velo_ville",
+    "gamme": "milieu",
+    "prix_neuf_eur": 549.0,
+    "est_securite": false,
+    "co2_kg": 150.0
+  },
+  {
+    "product_id": "P-VELO_V-04",
+    "nom": "Vélo de ville longue distance 11 vitesses",
+    "famille": "velo",
+    "categorie": "velo_ville",
+    "gamme": "haut",
+    "prix_neuf_eur": 799.0,
+    "est_securite": false,
+    "co2_kg": 170.0
+  },
+  {
+    "product_id": "P-VELO_V-05",
+    "nom": "Vélo pliant 6 vitesses",
+    "famille": "velo",
+    "categorie": "velo_ville",
+    "gamme": "milieu",
+    "prix_neuf_eur": 399.0,
+    "est_securite": false,
+    "co2_kg": 110.0
+  },
+  {
+    "product_id": "P-VTT-01",
+    "nom": "VTT semi-rigide 27,5 pouces 8 vitesses",
+    "famille": "velo",
+    "categorie": "vtt",
+    "gamme": "entree",
+    "prix_neuf_eur": 299.0,
+    "est_securite": false,
+    "co2_kg": 140.0
+  },
+  {
+    "product_id": "P-VTT-02",
+    "nom": "VTT semi-rigide 29 pouces 12 vitesses",
+    "famille": "velo",
+    "categorie": "vtt",
+    "gamme": "milieu",
+    "prix_neuf_eur": 699.0,
+    "est_securite": false,
+    "co2_kg": 165.0
+  },
+  {
+    "product_id": "P-VTT-03",
+    "nom": "VTT tout-suspendu 29 pouces",
+    "famille": "velo",
+    "categorie": "vtt",
+    "gamme": "haut",
+    "prix_neuf_eur": 1399.0,
+    "est_securite": false,
+    "co2_kg": 210.0
+  },
+  {
+    "product_id": "P-VTT-04",
+    "nom": "VTT junior 26 pouces",
+    "famille": "velo",
+    "categorie": "vtt",
+    "gamme": "entree",
+    "prix_neuf_eur": 249.0,
+    "est_securite": false,
+    "co2_kg": 110.0
+  },
+  {
+    "product_id": "P-VELO_R-01",
+    "nom": "Vélo de route aluminium 8 vitesses",
+    "famille": "velo",
+    "categorie": "velo_route",
+    "gamme": "entree",
+    "prix_neuf_eur": 449.0,
+    "est_securite": false,
+    "co2_kg": 150.0
+  },
+  {
+    "product_id": "P-VELO_R-02",
+    "nom": "Vélo de route endurance 11 vitesses",
+    "famille": "velo",
+    "categorie": "velo_route",
+    "gamme": "milieu",
+    "prix_neuf_eur": 999.0,
+    "est_securite": false,
+    "co2_kg": 185.0
+  },
+  {
+    "product_id": "P-VELO_R-03",
+    "nom": "Vélo de route carbone 12 vitesses",
+    "famille": "velo",
+    "categorie": "velo_route",
+    "gamme": "haut",
+    "prix_neuf_eur": 1899.0,
+    "est_securite": false,
+    "co2_kg": 230.0
+  },
+  {
+    "product_id": "P-VELO_R-04",
+    "nom": "Vélo gravel aluminium 10 vitesses",
+    "famille": "velo",
+    "categorie": "velo_route",
+    "gamme": "milieu",
+    "prix_neuf_eur": 899.0,
+    "est_securite": false,
+    "co2_kg": 175.0
+  },
+  {
+    "product_id": "P-VELO_E-01",
+    "nom": "Draisienne enfant 2-4 ans",
+    "famille": "velo",
+    "categorie": "velo_enfant",
+    "gamme": "entree",
+    "prix_neuf_eur": 59.0,
+    "est_securite": false,
+    "co2_kg": 25.0
+  },
+  {
+    "product_id": "P-VELO_E-02",
+    "nom": "Vélo enfant 16 pouces 4-6 ans",
+    "famille": "velo",
+    "categorie": "velo_enfant",
+    "gamme": "entree",
+    "prix_neuf_eur": 119.0,
+    "est_securite": false,
+    "co2_kg": 45.0
+  },
+  {
+    "product_id": "P-VELO_E-03",
+    "nom": "Vélo enfant 20 pouces 6-9 ans",
+    "famille": "velo",
+    "categorie": "velo_enfant",
+    "gamme": "milieu",
+    "prix_neuf_eur": 199.0,
+    "est_securite": false,
+    "co2_kg": 60.0
+  },
+  {
+    "product_id": "P-VELO_E-04",
+    "nom": "Vélo enfant 24 pouces 9-12 ans",
+    "famille": "velo",
+    "categorie": "velo_enfant",
+    "gamme": "milieu",
+    "prix_neuf_eur": 279.0,
+    "est_securite": false,
+    "co2_kg": 75.0
+  },
+  {
+    "product_id": "P-SIEGE_-01",
+    "nom": "Siège vélo enfant arrière sur porte-bagages",
+    "famille": "velo",
+    "categorie": "siege_velo_enfant",
+    "gamme": "entree",
+    "prix_neuf_eur": 45.0,
+    "est_securite": true,
+    "co2_kg": 8.0
+  },
+  {
+    "product_id": "P-SIEGE_-02",
+    "nom": "Siège vélo enfant arrière inclinable",
+    "famille": "velo",
+    "categorie": "siege_velo_enfant",
+    "gamme": "milieu",
+    "prix_neuf_eur": 99.0,
+    "est_securite": true,
+    "co2_kg": 11.0
+  },
+  {
+    "product_id": "P-SIEGE_-03",
+    "nom": "Siège vélo enfant avant",
+    "famille": "velo",
+    "categorie": "siege_velo_enfant",
+    "gamme": "milieu",
+    "prix_neuf_eur": 79.0,
+    "est_securite": true,
+    "co2_kg": 9.0
+  },
+  {
+    "product_id": "P-CASQUE-01",
+    "nom": "Casque vélo urbain",
+    "famille": "velo",
+    "categorie": "casque_velo",
+    "gamme": "entree",
+    "prix_neuf_eur": 19.0,
+    "est_securite": true,
+    "co2_kg": 2.0
+  },
+  {
+    "product_id": "P-CASQUE-02",
+    "nom": "Casque VTT avec visière",
+    "famille": "velo",
+    "categorie": "casque_velo",
+    "gamme": "milieu",
+    "prix_neuf_eur": 49.0,
+    "est_securite": true,
+    "co2_kg": 3.0
+  },
+  {
+    "product_id": "P-CASQUE-03",
+    "nom": "Casque vélo route ventilé",
+    "famille": "velo",
+    "categorie": "casque_velo",
+    "gamme": "haut",
+    "prix_neuf_eur": 99.0,
+    "est_securite": true,
+    "co2_kg": 4.0
+  },
+  {
+    "product_id": "P-CASQUE-04",
+    "nom": "Casque vélo enfant",
+    "famille": "velo",
+    "categorie": "casque_velo",
+    "gamme": "entree",
+    "prix_neuf_eur": 15.0,
+    "est_securite": true,
+    "co2_kg": 2.0
+  },
+  {
+    "product_id": "P-TENTE-01",
+    "nom": "Tente dôme 2 places",
+    "famille": "camping",
+    "categorie": "tente",
+    "gamme": "entree",
+    "prix_neuf_eur": 49.0,
+    "est_securite": false,
+    "co2_kg": 15.0
+  },
+  {
+    "product_id": "P-TENTE-02",
+    "nom": "Tente dôme 3 places",
+    "famille": "camping",
+    "categorie": "tente",
+    "gamme": "milieu",
+    "prix_neuf_eur": 99.0,
+    "est_securite": false,
+    "co2_kg": 22.0
+  },
+  {
+    "product_id": "P-TENTE-03",
+    "nom": "Tente familiale 4 places 2 chambres",
+    "famille": "camping",
+    "categorie": "tente",
+    "gamme": "milieu",
+    "prix_neuf_eur": 199.0,
+    "est_securite": false,
+    "co2_kg": 32.0
+  },
+  {
+    "product_id": "P-TENTE-04",
+    "nom": "Tente de trekking 2 places ultralégère",
+    "famille": "camping",
+    "categorie": "tente",
+    "gamme": "haut",
+    "prix_neuf_eur": 349.0,
+    "est_securite": false,
+    "co2_kg": 20.0
+  },
+  {
+    "product_id": "P-TENTE-05",
+    "nom": "Tente gonflable 4 places",
+    "famille": "camping",
+    "categorie": "tente",
+    "gamme": "haut",
+    "prix_neuf_eur": 399.0,
+    "est_securite": false,
+    "co2_kg": 38.0
+  },
+  {
+    "product_id": "P-SAC_CO-01",
+    "nom": "Sac de couchage 15 °C",
+    "famille": "camping",
+    "categorie": "sac_couchage",
+    "gamme": "entree",
+    "prix_neuf_eur": 25.0,
+    "est_securite": false,
+    "co2_kg": 8.0
+  },
+  {
+    "product_id": "P-SAC_CO-02",
+    "nom": "Sac de couchage 5 °C",
+    "famille": "camping",
+    "categorie": "sac_couchage",
+    "gamme": "milieu",
+    "prix_neuf_eur": 69.0,
+    "est_securite": false,
+    "co2_kg": 12.0
+  },
+  {
+    "product_id": "P-SAC_CO-03",
+    "nom": "Sac de couchage duvet 0 °C",
+    "famille": "camping",
+    "categorie": "sac_couchage",
+    "gamme": "haut",
+    "prix_neuf_eur": 179.0,
+    "est_securite": false,
+    "co2_kg": 18.0
+  },
+  {
+    "product_id": "P-SAC_CO-04",
+    "nom": "Sac de couchage enfant 10 °C",
+    "famille": "camping",
+    "categorie": "sac_couchage",
+    "gamme": "entree",
+    "prix_neuf_eur": 35.0,
+    "est_securite": false,
+    "co2_kg": 7.0
+  },
+  {
+    "product_id": "P-SAC_CO-05",
+    "nom": "Sac de couchage enfant évolutif 5 °C",
+    "famille": "camping",
+    "categorie": "sac_couchage",
+    "gamme": "milieu",
+    "prix_neuf_eur": 59.0,
+    "est_securite": false,
+    "co2_kg": 9.0
+  },
+  {
+    "product_id": "P-MATELA-01",
+    "nom": "Matelas mousse de camping",
+    "famille": "camping",
+    "categorie": "matelas_camping",
+    "gamme": "entree",
+    "prix_neuf_eur": 19.0,
+    "est_securite": false,
+    "co2_kg": 4.0
+  },
+  {
+    "product_id": "P-MATELA-02",
+    "nom": "Matelas autogonflant 1 personne",
+    "famille": "camping",
+    "categorie": "matelas_camping",
+    "gamme": "milieu",
+    "prix_neuf_eur": 49.0,
+    "est_securite": false,
+    "co2_kg": 6.0
+  },
+  {
+    "product_id": "P-MATELA-03",
+    "nom": "Matelas gonflable 2 personnes",
+    "famille": "camping",
+    "categorie": "matelas_camping",
+    "gamme": "milieu",
+    "prix_neuf_eur": 59.0,
+    "est_securite": false,
+    "co2_kg": 7.0
+  },
+  {
+    "product_id": "P-MATELA-04",
+    "nom": "Matelas de trekking isolant",
+    "famille": "camping",
+    "categorie": "matelas_camping",
+    "gamme": "haut",
+    "prix_neuf_eur": 99.0,
+    "est_securite": false,
+    "co2_kg": 8.0
+  },
+  {
+    "product_id": "P-CHAUSS-01",
+    "nom": "Chaussures de randonnée basses",
+    "famille": "randonnee",
+    "categorie": "chaussures_randonnee",
+    "gamme": "entree",
+    "prix_neuf_eur": 39.0,
+    "est_securite": false,
+    "co2_kg": 12.0
+  },
+  {
+    "product_id": "P-CHAUSS-02",
+    "nom": "Chaussures de randonnée mi-hautes imperméables",
+    "famille": "randonnee",
+    "categorie": "chaussures_randonnee",
+    "gamme": "milieu",
+    "prix_neuf_eur": 89.0,
+    "est_securite": false,
+    "co2_kg": 14.0
+  },
+  {
+    "product_id": "P-CHAUSS-03",
+    "nom": "Chaussures de trekking cuir imperméables",
+    "famille": "randonnee",
+    "categorie": "chaussures_randonnee",
+    "gamme": "haut",
+    "prix_neuf_eur": 169.0,
+    "est_securite": false,
+    "co2_kg": 17.0
+  },
+  {
+    "product_id": "P-CHAUSS-04",
+    "nom": "Chaussures de randonnée enfant imperméables",
+    "famille": "randonnee",
+    "categorie": "chaussures_randonnee",
+    "gamme": "entree",
+    "prix_neuf_eur": 35.0,
+    "est_securite": false,
+    "co2_kg": 10.0
+  },
+  {
+    "product_id": "P-CHAUSS-05",
+    "nom": "Chaussures de randonnée rapide légères",
+    "famille": "randonnee",
+    "categorie": "chaussures_randonnee",
+    "gamme": "milieu",
+    "prix_neuf_eur": 99.0,
+    "est_securite": false,
+    "co2_kg": 13.0
+  },
+  {
+    "product_id": "P-SAC_A_-01",
+    "nom": "Sac à dos de randonnée 20 L",
+    "famille": "randonnee",
+    "categorie": "sac_a_dos",
+    "gamme": "entree",
+    "prix_neuf_eur": 19.0,
+    "est_securite": false,
+    "co2_kg": 6.0
+  },
+  {
+    "product_id": "P-SAC_A_-02",
+    "nom": "Sac à dos de randonnée 30 L",
+    "famille": "randonnee",
+    "categorie": "sac_a_dos",
+    "gamme": "milieu",
+    "prix_neuf_eur": 49.0,
+    "est_securite": false,
+    "co2_kg": 8.0
+  },
+  {
+    "product_id": "P-SAC_A_-03",
+    "nom": "Sac à dos de trekking 50 L",
+    "famille": "randonnee",
+    "categorie": "sac_a_dos",
+    "gamme": "milieu",
+    "prix_neuf_eur": 99.0,
+    "est_securite": false,
+    "co2_kg": 11.0
+  },
+  {
+    "product_id": "P-SAC_A_-04",
+    "nom": "Sac à dos de trekking 70 L",
+    "famille": "randonnee",
+    "categorie": "sac_a_dos",
+    "gamme": "haut",
+    "prix_neuf_eur": 169.0,
+    "est_securite": false,
+    "co2_kg": 13.0
+  },
+  {
+    "product_id": "P-SAC_A_-05",
+    "nom": "Sac à dos enfant 10 L",
+    "famille": "randonnee",
+    "categorie": "sac_a_dos",
+    "gamme": "entree",
+    "prix_neuf_eur": 15.0,
+    "est_securite": false,
+    "co2_kg": 4.0
+  },
+  {
+    "product_id": "P-BATONS-01",
+    "nom": "Bâtons de marche télescopiques (paire)",
+    "famille": "randonnee",
+    "categorie": "batons_marche",
+    "gamme": "entree",
+    "prix_neuf_eur": 15.0,
+    "est_securite": false,
+    "co2_kg": 3.0
+  },
+  {
+    "product_id": "P-BATONS-02",
+    "nom": "Bâtons de randonnée réglables (paire)",
+    "famille": "randonnee",
+    "categorie": "batons_marche",
+    "gamme": "milieu",
+    "prix_neuf_eur": 35.0,
+    "est_securite": false,
+    "co2_kg": 4.0
+  },
+  {
+    "product_id": "P-BATONS-03",
+    "nom": "Bâtons de trekking carbone pliants (paire)",
+    "famille": "randonnee",
+    "categorie": "batons_marche",
+    "gamme": "haut",
+    "prix_neuf_eur": 79.0,
+    "est_securite": false,
+    "co2_kg": 5.0
+  },
+  {
+    "product_id": "P-VESTE_-01",
+    "nom": "Veste imperméable de randonnée",
+    "famille": "randonnee",
+    "categorie": "veste_impermeable",
+    "gamme": "entree",
+    "prix_neuf_eur": 29.0,
+    "est_securite": false,
+    "co2_kg": 10.0
+  },
+  {
+    "product_id": "P-VESTE_-02",
+    "nom": "Veste imperméable respirante 3 couches",
+    "famille": "randonnee",
+    "categorie": "veste_impermeable",
+    "gamme": "milieu",
+    "prix_neuf_eur": 79.0,
+    "est_securite": false,
+    "co2_kg": 15.0
+  },
+  {
+    "product_id": "P-VESTE_-03",
+    "nom": "Veste de trekking imperméable haute montagne",
+    "famille": "randonnee",
+    "categorie": "veste_impermeable",
+    "gamme": "haut",
+    "prix_neuf_eur": 199.0,
+    "est_securite": false,
+    "co2_kg": 22.0
+  },
+  {
+    "product_id": "P-VESTE_-04",
+    "nom": "Veste imperméable enfant",
+    "famille": "randonnee",
+    "categorie": "veste_impermeable",
+    "gamme": "entree",
+    "prix_neuf_eur": 25.0,
+    "est_securite": false,
+    "co2_kg": 8.0
+  }
+]

@@ -1,0 +1,134 @@
+[
+  {
+    "product_id": "P-VELO_V-02",
+    "prix_jour_eur": 27.0,
+    "prix_semaine_eur": 108.0,
+    "caution_eur": 224.0
+  },
+  {
+    "product_id": "P-VELO_V-03",
+    "prix_jour_eur": 33.0,
+    "prix_semaine_eur": 132.0,
+    "caution_eur": 274.0
+  },
+  {
+    "product_id": "P-VELO_V-04",
+    "prix_jour_eur": 48.0,
+    "prix_semaine_eur": 192.0,
+    "caution_eur": 400.0
+  },
+  {
+    "product_id": "P-VELO_V-05",
+    "prix_jour_eur": 24.0,
+    "prix_semaine_eur": 96.0,
+    "caution_eur": 200.0
+  },
+  {
+    "product_id": "P-VTT-02",
+    "prix_jour_eur": 42.0,
+    "prix_semaine_eur": 168.0,
+    "caution_eur": 350.0
+  },
+  {
+    "product_id": "P-VTT-03",
+    "prix_jour_eur": 84.0,
+    "prix_semaine_eur": 336.0,
+    "caution_eur": 700.0
+  },
+  {
+    "product_id": "P-VELO_R-02",
+    "prix_jour_eur": 60.0,
+    "prix_semaine_eur": 240.0,
+    "caution_eur": 500.0
+  },
+  {
+    "product_id": "P-VELO_R-03",
+    "prix_jour_eur": 114.0,
+    "prix_semaine_eur": 456.0,
+    "caution_eur": 950.0
+  },
+  {
+    "product_id": "P-VELO_R-04",
+    "prix_jour_eur": 54.0,
+    "prix_semaine_eur": 216.0,
+    "caution_eur": 450.0
+  },
+  {
+    "product_id": "P-TENTE-02",
+    "prix_jour_eur": 6.0,
+    "prix_semaine_eur": 24.0,
+    "caution_eur": 50.0
+  },
+  {
+    "product_id": "P-TENTE-03",
+    "prix_jour_eur": 12.0,
+    "prix_semaine_eur": 48.0,
+    "caution_eur": 100.0
+  },
+  {
+    "product_id": "P-TENTE-04",
+    "prix_jour_eur": 21.0,
+    "prix_semaine_eur": 84.0,
+    "caution_eur": 174.0
+  },
+  {
+    "product_id": "P-TENTE-05",
+    "prix_jour_eur": 24.0,
+    "prix_semaine_eur": 96.0,
+    "caution_eur": 200.0
+  },
+  {
+    "product_id": "P-SAC_CO-02",
+    "prix_jour_eur": 4.0,
+    "prix_semaine_eur": 16.0,
+    "caution_eur": 34.0
+  },
+  {
+    "product_id": "P-SAC_CO-03",
+    "prix_jour_eur": 11.0,
+    "prix_semaine_eur": 44.0,
+    "caution_eur": 90.0
+  },
+  {
+    "product_id": "P-SAC_CO-05",
+    "prix_jour_eur": 4.0,
+    "prix_semaine_eur": 16.0,
+    "caution_eur": 30.0
+  },
+  {
+    "product_id": "P-MATELA-02",
+    "prix_jour_eur": 3.0,
+    "prix_semaine_eur": 12.0,
+    "caution_eur": 24.0
+  },
+  {
+    "product_id": "P-MATELA-03",
+    "prix_jour_eur": 4.0,
+    "prix_semaine_eur": 16.0,
+    "caution_eur": 30.0
+  },
+  {
+    "product_id": "P-MATELA-04",
+    "prix_jour_eur": 6.0,
+    "prix_semaine_eur": 24.0,
+    "caution_eur": 50.0
+  },
+  {
+    "product_id": "P-SAC_A_-02",
+    "prix_jour_eur": 3.0,
+    "prix_semaine_eur": 12.0,
+    "caution_eur": 24.0
+  },
+  {
+    "product_id": "P-SAC_A_-03",
+    "prix_jour_eur": 6.0,
+    "prix_semaine_eur": 24.0,
+    "caution_eur": 50.0
+  },
+  {
+    "product_id": "P-SAC_A_-04",
+    "prix_jour_eur": 10.0,
+    "prix_semaine_eur": 40.0,
+    "caution_eur": 84.0
+  }
+]

@@ -1,0 +1,364 @@
+[
+  {
+    "part_id": "PC-001",
+    "nom": "Kit de réparation d'arceau fibre (manchon + élastique)",
+    "categories": [
+      "tente"
+    ],
+    "defaut": "arceau_casse",
+    "prix_eur": 9.99,
+    "difficulte": "facile",
+    "tutoriel": "https://second-souffle.example/tutos/arceau-casse-001"
+  },
+  {
+    "part_id": "PC-002",
+    "nom": "Arceau fibre de remplacement Ø 8,5 mm",
+    "categories": [
+      "tente"
+    ],
+    "defaut": "arceau_casse",
+    "prix_eur": 14.99,
+    "difficulte": "moyen",
+    "tutoriel": "https://second-souffle.example/tutos/arceau-casse-002"
+  },
+  {
+    "part_id": "PC-003",
+    "nom": "Arceau aluminium de remplacement Ø 9,5 mm",
+    "categories": [
+      "tente"
+    ],
+    "defaut": "arceau_casse",
+    "prix_eur": 24.99,
+    "difficulte": "moyen",
+    "tutoriel": "https://second-souffle.example/tutos/arceau-casse-003"
+  },
+  {
+    "part_id": "PC-004",
+    "nom": "Patchs autocollants pour toile de tente (lot de 4)",
+    "categories": [
+      "tente"
+    ],
+    "defaut": "dechirure_toile",
+    "prix_eur": 4.99,
+    "difficulte": "facile",
+    "tutoriel": "https://second-souffle.example/tutos/dechirure-toile-004"
+  },
+  {
+    "part_id": "PC-005",
+    "nom": "Kit de réparation toile avec colle souple",
+    "categories": [
+      "tente"
+    ],
+    "defaut": "dechirure_toile",
+    "prix_eur": 8.99,
+    "difficulte": "facile",
+    "tutoriel": "https://second-souffle.example/tutos/dechirure-toile-005"
+  },
+  {
+    "part_id": "PC-006",
+    "nom": "Curseurs de fermeture éclair (lot de 2)",
+    "categories": [
+      "tente",
+      "sac_couchage",
+      "sac_a_dos",
+      "veste_impermeable"
+    ],
+    "defaut": "fermeture_eclair_cassee",
+    "prix_eur": 5.99,
+    "difficulte": "moyen",
+    "tutoriel": "https://second-souffle.example/tutos/fermeture-eclair-cassee-006"
+  },
+  {
+    "part_id": "PC-007",
+    "nom": "Tendeurs de tente avec cordelette (lot de 4)",
+    "categories": [
+      "tente"
+    ],
+    "defaut": "tendeur_casse",
+    "prix_eur": 4.99,
+    "difficulte": "facile",
+    "tutoriel": "https://second-souffle.example/tutos/tendeur-casse-007"
+  },
+  {
+    "part_id": "PC-008",
+    "nom": "Sardines aluminium (lot de 10)",
+    "categories": [
+      "tente"
+    ],
+    "defaut": "sardines_manquantes",
+    "prix_eur": 6.99,
+    "difficulte": "facile",
+    "tutoriel": "https://second-souffle.example/tutos/sardines-manquantes-008"
+  },
+  {
+    "part_id": "PC-009",
+    "nom": "Spray imperméabilisant 300 ml",
+    "categories": [
+      "tente",
+      "chaussures_randonnee",
+      "veste_impermeable"
+    ],
+    "defaut": "impermeabilite_degradee",
+    "prix_eur": 9.99,
+    "difficulte": "facile",
+    "tutoriel": "https://second-souffle.example/tutos/impermeabilite-degradee-009"
+  },
+  {
+    "part_id": "PC-010",
+    "nom": "Patchs nylon autocollants (lot de 6)",
+    "categories": [
+      "sac_couchage",
+      "sac_a_dos",
+      "veste_impermeable"
+    ],
+    "defaut": "dechirure_tissu",
+    "prix_eur": 5.99,
+    "difficulte": "facile",
+    "tutoriel": "https://second-souffle.example/tutos/dechirure-tissu-010"
+  },
+  {
+    "part_id": "PC-011",
+    "nom": "Kit de rustines pour matelas",
+    "categories": [
+      "matelas_camping"
+    ],
+    "defaut": "crevaison",
+    "prix_eur": 4.99,
+    "difficulte": "facile",
+    "tutoriel": "https://second-souffle.example/tutos/crevaison-011"
+  },
+  {
+    "part_id": "PC-012",
+    "nom": "Valve de remplacement pour matelas autogonflant",
+    "categories": [
+      "matelas_camping"
+    ],
+    "defaut": "valve_defectueuse",
+    "prix_eur": 6.99,
+    "difficulte": "moyen",
+    "tutoriel": "https://second-souffle.example/tutos/valve-defectueuse-012"
+  },
+  {
+    "part_id": "PC-013",
+    "nom": "Colle néoprène pour chaussures 30 g",
+    "categories": [
+      "chaussures_randonnee"
+    ],
+    "defaut": "semelle_decollee",
+    "prix_eur": 7.99,
+    "difficulte": "facile",
+    "tutoriel": "https://second-souffle.example/tutos/semelle-decollee-013"
+  },
+  {
+    "part_id": "PC-014",
+    "nom": "Lacets ronds de randonnée 150 cm",
+    "categories": [
+      "chaussures_randonnee"
+    ],
+    "defaut": "lacets_casses",
+    "prix_eur": 3.99,
+    "difficulte": "facile",
+    "tutoriel": "https://second-souffle.example/tutos/lacets-casses-014"
+  },
+  {
+    "part_id": "PC-015",
+    "nom": "Boucles clipsables 25 mm (lot de 2)",
+    "categories": [
+      "sac_a_dos"
+    ],
+    "defaut": "boucle_cassee",
+    "prix_eur": 3.99,
+    "difficulte": "facile",
+    "tutoriel": "https://second-souffle.example/tutos/boucle-cassee-015"
+  },
+  {
+    "part_id": "PC-016",
+    "nom": "Kit couture renforcée pour sangles",
+    "categories": [
+      "sac_a_dos"
+    ],
+    "defaut": "bretelle_dechiree",
+    "prix_eur": 7.99,
+    "difficulte": "moyen",
+    "tutoriel": "https://second-souffle.example/tutos/bretelle-dechiree-016"
+  },
+  {
+    "part_id": "PC-017",
+    "nom": "Embouts carbure de remplacement (paire)",
+    "categories": [
+      "batons_marche"
+    ],
+    "defaut": "embout_use",
+    "prix_eur": 5.99,
+    "difficulte": "facile",
+    "tutoriel": "https://second-souffle.example/tutos/embout-use-017"
+  },
+  {
+    "part_id": "PC-018",
+    "nom": "Kit de blocage rapide pour bâton",
+    "categories": [
+      "batons_marche"
+    ],
+    "defaut": "blocage_casse",
+    "prix_eur": 7.99,
+    "difficulte": "moyen",
+    "tutoriel": "https://second-souffle.example/tutos/blocage-casse-018"
+  },
+  {
+    "part_id": "PC-019",
+    "nom": "Patins de frein V-brake (paire)",
+    "categories": [
+      "velo_ville",
+      "vtt",
+      "velo_route",
+      "velo_enfant"
+    ],
+    "defaut": "freins_uses",
+    "prix_eur": 6.99,
+    "difficulte": "moyen",
+    "tutoriel": "https://second-souffle.example/tutos/freins-uses-019"
+  },
+  {
+    "part_id": "PC-020",
+    "nom": "Plaquettes de frein à disque (paire)",
+    "categories": [
+      "velo_ville",
+      "vtt",
+      "velo_route"
+    ],
+    "defaut": "freins_uses",
+    "prix_eur": 12.99,
+    "difficulte": "moyen",
+    "tutoriel": "https://second-souffle.example/tutos/freins-uses-020"
+  },
+  {
+    "part_id": "PC-021",
+    "nom": "Chaîne 8 vitesses",
+    "categories": [
+      "velo_ville",
+      "vtt",
+      "velo_route",
+      "velo_enfant"
+    ],
+    "defaut": "chaine_usee",
+    "prix_eur": 14.99,
+    "difficulte": "moyen",
+    "tutoriel": "https://second-souffle.example/tutos/chaine-usee-021"
+  },
+  {
+    "part_id": "PC-022",
+    "nom": "Chaîne 11/12 vitesses",
+    "categories": [
+      "vtt",
+      "velo_route"
+    ],
+    "defaut": "chaine_usee",
+    "prix_eur": 29.99,
+    "difficulte": "moyen",
+    "tutoriel": "https://second-souffle.example/tutos/chaine-usee-022"
+  },
+  {
+    "part_id": "PC-023",
+    "nom": "Chambre à air avec valve Presta ou Schrader",
+    "categories": [
+      "velo_ville",
+      "vtt",
+      "velo_route",
+      "velo_enfant"
+    ],
+    "defaut": "pneu_creve",
+    "prix_eur": 5.99,
+    "difficulte": "facile",
+    "tutoriel": "https://second-souffle.example/tutos/pneu-creve-023"
+  },
+  {
+    "part_id": "PC-024",
+    "nom": "Kit de réparation crevaison",
+    "categories": [
+      "velo_ville",
+      "vtt",
+      "velo_route",
+      "velo_enfant"
+    ],
+    "defaut": "pneu_creve",
+    "prix_eur": 4.99,
+    "difficulte": "facile",
+    "tutoriel": "https://second-souffle.example/tutos/pneu-creve-024"
+  },
+  {
+    "part_id": "PC-025",
+    "nom": "Pneu ville renforcé anti-crevaison",
+    "categories": [
+      "velo_ville",
+      "velo_enfant"
+    ],
+    "defaut": "pneu_use",
+    "prix_eur": 19.99,
+    "difficulte": "moyen",
+    "tutoriel": "https://second-souffle.example/tutos/pneu-use-025"
+  },
+  {
+    "part_id": "PC-026",
+    "nom": "Pneu VTT 29 pouces",
+    "categories": [
+      "vtt"
+    ],
+    "defaut": "pneu_use",
+    "prix_eur": 24.99,
+    "difficulte": "moyen",
+    "tutoriel": "https://second-souffle.example/tutos/pneu-use-026"
+  },
+  {
+    "part_id": "PC-027",
+    "nom": "Pneu route 700x28",
+    "categories": [
+      "velo_route"
+    ],
+    "defaut": "pneu_use",
+    "prix_eur": 22.99,
+    "difficulte": "moyen",
+    "tutoriel": "https://second-souffle.example/tutos/pneu-use-027"
+  },
+  {
+    "part_id": "PC-028",
+    "nom": "Câble et gaine de dérailleur",
+    "categories": [
+      "velo_ville",
+      "vtt",
+      "velo_route",
+      "velo_enfant"
+    ],
+    "defaut": "derailleur_deregle",
+    "prix_eur": 4.99,
+    "difficulte": "moyen",
+    "tutoriel": "https://second-souffle.example/tutos/derailleur-deregle-028"
+  },
+  {
+    "part_id": "PC-029",
+    "nom": "Rayons inox avec écrous (lot de 4)",
+    "categories": [
+      "velo_ville",
+      "vtt",
+      "velo_route",
+      "velo_enfant"
+    ],
+    "defaut": "rayon_casse",
+    "prix_eur": 6.99,
+    "difficulte": "atelier",
+    "tutoriel": "https://second-souffle.example/tutos/rayon-casse-029"
+  },
+  {
+    "part_id": "PC-030",
+    "nom": "Kit d'éclairage LED avant et arrière",
+    "categories": [
+      "velo_ville",
+      "vtt",
+      "velo_route",
+      "velo_enfant"
+    ],
+    "defaut": "eclairage_defectueux",
+    "prix_eur": 14.99,
+    "difficulte": "facile",
+    "tutoriel": "https://second-souffle.example/tutos/eclairage-defectueux-030"
+  }
+]

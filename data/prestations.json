@@ -1,0 +1,217 @@
+[
+  {
+    "service_id": "SV-001",
+    "categories": [
+      "tente"
+    ],
+    "defaut": "arceau_casse",
+    "prix_eur": 25.0,
+    "duree_jours": 7
+  },
+  {
+    "service_id": "SV-002",
+    "categories": [
+      "tente"
+    ],
+    "defaut": "dechirure_toile",
+    "prix_eur": 20.0,
+    "duree_jours": 7
+  },
+  {
+    "service_id": "SV-003",
+    "categories": [
+      "tente",
+      "sac_couchage",
+      "sac_a_dos",
+      "veste_impermeable"
+    ],
+    "defaut": "fermeture_eclair_cassee",
+    "prix_eur": 25.0,
+    "duree_jours": 10
+  },
+  {
+    "service_id": "SV-004",
+    "categories": [
+      "tente"
+    ],
+    "defaut": "tendeur_casse",
+    "prix_eur": 10.0,
+    "duree_jours": 3
+  },
+  {
+    "service_id": "SV-005",
+    "categories": [
+      "sac_couchage",
+      "sac_a_dos",
+      "veste_impermeable"
+    ],
+    "defaut": "dechirure_tissu",
+    "prix_eur": 15.0,
+    "duree_jours": 7
+  },
+  {
+    "service_id": "SV-006",
+    "categories": [
+      "matelas_camping"
+    ],
+    "defaut": "valve_defectueuse",
+    "prix_eur": 15.0,
+    "duree_jours": 5
+  },
+  {
+    "service_id": "SV-007",
+    "categories": [
+      "matelas_camping"
+    ],
+    "defaut": "crevaison",
+    "prix_eur": 10.0,
+    "duree_jours": 3
+  },
+  {
+    "service_id": "SV-008",
+    "categories": [
+      "chaussures_randonnee"
+    ],
+    "defaut": "semelle_decollee",
+    "prix_eur": 25.0,
+    "duree_jours": 10
+  },
+  {
+    "service_id": "SV-009",
+    "categories": [
+      "chaussures_randonnee"
+    ],
+    "defaut": "semelle_usee",
+    "prix_eur": 45.0,
+    "duree_jours": 14
+  },
+  {
+    "service_id": "SV-010",
+    "categories": [
+      "chaussures_randonnee"
+    ],
+    "defaut": "couture_decousue",
+    "prix_eur": 15.0,
+    "duree_jours": 7
+  },
+  {
+    "service_id": "SV-011",
+    "categories": [
+      "sac_a_dos"
+    ],
+    "defaut": "bretelle_dechiree",
+    "prix_eur": 20.0,
+    "duree_jours": 10
+  },
+  {
+    "service_id": "SV-012",
+    "categories": [
+      "sac_a_dos"
+    ],
+    "defaut": "boucle_cassee",
+    "prix_eur": 8.0,
+    "duree_jours": 3
+  },
+  {
+    "service_id": "SV-013",
+    "categories": [
+      "batons_marche"
+    ],
+    "defaut": "blocage_casse",
+    "prix_eur": 12.0,
+    "duree_jours": 5
+  },
+  {
+    "service_id": "SV-014",
+    "categories": [
+      "velo_ville",
+      "vtt",
+      "velo_route",
+      "velo_enfant"
+    ],
+    "defaut": "freins_uses",
+    "prix_eur": 15.0,
+    "duree_jours": 1
+  },
+  {
+    "service_id": "SV-015",
+    "categories": [
+      "velo_ville",
+      "vtt",
+      "velo_route",
+      "velo_enfant"
+    ],
+    "defaut": "chaine_usee",
+    "prix_eur": 25.0,
+    "duree_jours": 1
+  },
+  {
+    "service_id": "SV-016",
+    "categories": [
+      "velo_ville",
+      "vtt",
+      "velo_route",
+      "velo_enfant"
+    ],
+    "defaut": "pneu_creve",
+    "prix_eur": 12.0,
+    "duree_jours": 1
+  },
+  {
+    "service_id": "SV-017",
+    "categories": [
+      "velo_ville",
+      "vtt",
+      "velo_route",
+      "velo_enfant"
+    ],
+    "defaut": "pneu_use",
+    "prix_eur": 30.0,
+    "duree_jours": 1
+  },
+  {
+    "service_id": "SV-018",
+    "categories": [
+      "velo_ville",
+      "vtt",
+      "velo_route",
+      "velo_enfant"
+    ],
+    "defaut": "derailleur_deregle",
+    "prix_eur": 15.0,
+    "duree_jours": 1
+  },
+  {
+    "service_id": "SV-019",
+    "categories": [
+      "velo_ville",
+      "vtt",
+      "velo_route",
+      "velo_enfant"
+    ],
+    "defaut": "rayon_casse",
+    "prix_eur": 20.0,
+    "duree_jours": 2
+  },
+  {
+    "service_id": "SV-020",
+    "categories": [
+      "velo_ville",
+      "vtt",
+      "velo_route",
+      "velo_enfant"
+    ],
+    "defaut": "eclairage_defectueux",
+    "prix_eur": 15.0,
+    "duree_jours": 1
+  },
+  {
+    "service_id": "SV-021",
+    "categories": [
+      "vtt"
+    ],
+    "defaut": "suspension_fuit",
+    "prix_eur": 69.0,
+    "duree_jours": 14
+  }
+]

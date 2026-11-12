@@ -1,0 +1,54 @@
+{
+  "_note": "Barème fictif. R02 : offre = prix neuf de référence × coef. état × coef. âge, plafonnée.",
+  "coef_etat": {
+    "bon": 0.45,
+    "moyen": 0.3,
+    "use": 0.15,
+    "hors_usage": 0.0
+  },
+  "coef_age": [
+    {
+      "age_max_annees": 1,
+      "coef": 1.0
+    },
+    {
+      "age_max_annees": 2,
+      "coef": 0.85
+    },
+    {
+      "age_max_annees": 4,
+      "coef": 0.7
+    },
+    {
+      "age_max_annees": 6,
+      "coef": 0.5
+    },
+    {
+      "age_max_annees": null,
+      "coef": 0.3
+    }
+  ],
+  "plafond_par_categorie": {
+    "velo_ville": 250,
+    "vtt": 450,
+    "velo_route": 600,
+    "velo_enfant": 80,
+    "siege_velo_enfant": 0,
+    "casque_velo": 0,
+    "tente": 120,
+    "sac_couchage": 60,
+    "matelas_camping": 30,
+    "chaussures_randonnee": 50,
+    "sac_a_dos": 50,
+    "batons_marche": 25,
+    "veste_impermeable": 60
+  },
+  "co2_evite_ratio": {
+    "_note": "Part de l'empreinte d'un produit neuf évitée par option (hypothèses de démonstration).",
+    "reparer": 0.75,
+    "occasion": 0.8,
+    "louer": 0.6,
+    "revendre": 0.5,
+    "recycler": 0.05
+  }
+}
