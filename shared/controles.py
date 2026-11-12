@@ -71,6 +71,10 @@ def controler_message(message: str, reco: Recommandation, autres_sources: list |
     marques = [m for m in MARQUES_INTERDITES if re.search(rf"\b{re.escape(m)}\b", bas)]
     if marques:
         motifs.append(f"marques citées : {', '.join(marques)}")
+    # Un nom de champ ou d'identifiant technique ne doit jamais atteindre le client (vu : « évite_kg »)
+    techniques = re.findall(r"\b\w+_(?:kg|eur|jours|id)\b|\b(?:PC|SV|OC|AT)-\d{2,3}\b", message)
+    if techniques:
+        motifs.append(f"termes techniques dans le message : {', '.join(sorted(set(techniques)))}")
     if len(message.split()) > MAX_MOTS:
         motifs.append(f"message trop long ({len(message.split())} mots, {MAX_MOTS} au plus)")
 

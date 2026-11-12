@@ -29,7 +29,8 @@ for sa in agents-second-souffle orchestrateur-second-souffle; do
     gc iam service-accounts create "$sa" --display-name "Second Souffle ($sa)"
 done
 for sa in "$SA_AGENTS" "$SA_ORCH"; do
-  for role in roles/aiplatform.user roles/cloudtrace.agent roles/logging.logWriter roles/monitoring.metricWriter; do
+    # telemetry.tracesWriter : ADK exporte en OTLP vers telemetry.googleapis.com (cloudtrace.agent ne suffit pas)
+  for role in roles/aiplatform.user roles/cloudtrace.agent roles/telemetry.tracesWriter roles/logging.logWriter roles/monitoring.metricWriter; do
     gc projects add-iam-policy-binding "$PROJECT" --member "serviceAccount:$sa" --role "$role" --condition None >/dev/null
   done
 done

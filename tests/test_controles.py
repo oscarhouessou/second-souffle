@@ -55,3 +55,10 @@ def test_option_recommandee_absente_refusee(reco):
 ])
 def test_r07_confirmation_explicite(texte, attendu):
     assert est_confirmation(texte) is attendu
+
+
+def test_terme_technique_refuse(reco):
+    """Vu en production : « 16,5 kg de CO₂ évite_kg »."""
+    v = controler_message(bon_message(reco) + " 16,5 kg de CO₂ évite_kg.", reco)
+    assert any("techniques" in m for m in v.motifs)
+    assert not controler_message(bon_message(reco) + " Référence PC-001.", reco).accepte
