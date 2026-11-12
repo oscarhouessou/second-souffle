@@ -35,10 +35,16 @@ for sa in "$SA_AGENTS" "$SA_ORCH"; do
 done
 
 echo "3/6 Images (un build Cloud Build par service)"
-for s in mcp_catalog diagnostic repair valuation judge orchestrator; do
-  gc builds submit --config ".cloudbuild/$s.yaml" --substitutions "_REGION=$REGION" . &
-done
-wait
+# Un par un : sur un projet neuf, le premier build crée le bucket de Cloud Build ; en parallèle, les
+# autres échouent. Et avec set -e, un build en échec arrête le script (pas de déploiement sans image).
+# SKIP_BUILD=1 réutilise les images déjà publiées.
+if [ "${SKIP_BUILD:-}" != "1" ]; then
+  for s in mcp_catalog diagnostic repair valuation judge orchestrator; do
+    echo "  ▶ build $s"
+    gc builds submit --config ".cloudbuild/$s.yaml" --substitutions "_REGION=$REGION" --quiet . > "/tmp/build-$s.log" 2>&1 \
+      || { echo "build $s en échec :"; tail -20 "/tmp/build-$s.log"; exit 1; }
+  done
+fi
 
 image() { echo "${REGION}-docker.pkg.dev/${PROJECT}/${REPO}/$1:latest"; }
 url() { gc run services describe "$1" --region "$REGION" --format 'value(status.url)'; }

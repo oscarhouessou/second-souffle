@@ -24,3 +24,8 @@ htmlcov/
 # Évaluation : seul le dernier rapport est versionné
 eval/resultats/*
 !eval/resultats/dernier-rapport.md
+
+# MLflow (suivi local des évaluations)
+mlflow.db
+mlruns/
+mlartifacts/

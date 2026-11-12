@@ -10,6 +10,7 @@ et s'écrit dans eval/resultats/. Code de sortie 1 si un seuil n'est pas atteint
 import argparse
 import asyncio
 import json
+import os
 import statistics
 import sys
 import time
@@ -25,9 +26,10 @@ from google.genai import types  # noqa: E402
 
 from orchestrator import messages as msgs  # noqa: E402
 from orchestrator.agent import root_agent  # noqa: E402
+import suivi_mlflow  # noqa: E402
 from scenarios import ATTAQUES, LIMITES, NOMINAUX  # noqa: E402
 from shared import data, garde_fous, regles  # noqa: E402
-from shared.config import model_name_for  # noqa: E402
+from shared.config import SEUIL_CONFIANCE, THINKING_LEVEL, model_name_for  # noqa: E402
 from shared.controles import controler_message  # noqa: E402
 from shared.schemas import FicheDiagnostic, Recommandation  # noqa: E402
 from shared.vocabulaire import famille_de  # noqa: E402
@@ -195,8 +197,10 @@ def rapport(res: dict, duree_s: float) -> tuple[str, bool]:
     couts = [x["cout_eur"] for x in tous if x.get("cout_eur") is not None]
 
     criteres = []
+    metriques: dict[str, float | None] = {}
 
     def ligne(libelle, valeur, n, seuil, plus_petit=False, fmt="{:.0%}"):
+        metriques[_cle(libelle)] = valeur
         ok = None if valeur is None else (valeur <= seuil if plus_petit else valeur >= seuil)
         txt = "—" if valeur is None else fmt.format(valeur)
         criteres.append((libelle, txt, n, ("≤ " if plus_petit else "≥ ") + fmt.format(seuil), ok))
@@ -216,6 +220,12 @@ def rapport(res: dict, duree_s: float) -> tuple[str, bool]:
 
     reussi = all(ok is not False for *_, ok in criteres)
     secours = taux(nom, "secours_utilise")[0]
+    metriques |= {
+        "latence_mediane_s": statistics.median(lat) if lat else None,
+        "taux_message_secours": secours,
+        "taux_repli_modele": _taux_repli(tous),
+        "duree_eval_min": duree_s / 60,
+    }
     md = [
         f"# Rapport d'évaluation — {datetime.now():%Y-%m-%d %H:%M}",
         "",
@@ -242,7 +252,33 @@ def rapport(res: dict, duree_s: float) -> tuple[str, bool]:
     for x in att:
         if not (x["sans_effet"] and x["bloquee"]):
             md.append(f"- **Attaque** {x['nom']} : sans effet {x['sans_effet']}, bloquée {x['bloquee']} — « {x['derniere_reponse'][:120]} »")
-    return "\n".join(md) + "\n", reussi
+    return "\n".join(md) + "\n", reussi, metriques
+
+
+def _cle(libelle: str) -> str:
+    import unicodedata
+
+    s = unicodedata.normalize("NFKD", libelle).encode("ascii", "ignore").decode().lower()
+    return "_".join("".join(c if c.isalnum() else " " for c in s).split())[:60]
+
+
+def _taux_repli(cas: list) -> float | None:
+    etapes = [e for x in cas for t in x["tours"] for e in t["etapes"].values() if "repli_modele" in e]
+    return sum(bool(e["repli_modele"]) for e in etapes) / len(etapes) if etapes else None
+
+
+def config_evaluee() -> dict:
+    from diagnostic.prompt import PROMPT_VERSION as p_diag
+    from orchestrator.prompts import PROMPT_VERSION as p_orch
+    from repair.prompt import PROMPT_VERSION as p_rep
+    from valuation.prompt import PROMPT_VERSION as p_val
+
+    return {
+        **{f"modele_{r}": model_name_for(r) for r in ("diagnostic", "repair", "valuation", "redacteur", "conseiller")},
+        "prompt_diagnostic": p_diag, "prompt_reparation": p_rep, "prompt_valorisation": p_val, "prompt_orchestrateur": p_orch,
+        "reflexion": THINKING_LEVEL, "seuil_confiance": SEUIL_CONFIANCE,
+        "juge_llm": os.getenv("JUGE_LLM", "0"), "location": os.getenv("GOOGLE_CLOUD_LOCATION"),
+    }
 
 
 async def main():
@@ -250,7 +286,13 @@ async def main():
     ap.add_argument("--jeu", choices=["tout", "nominal", "limites", "attaques"], default="tout")
     ap.add_argument("--limite", type=int, default=None, help="nombre de scénarios par jeu")
     ap.add_argument("--parallele", type=int, default=2, help="scénarios joués en même temps (quota Vertex AI)")
+    ap.add_argument("--nom", default=None, help="nom du run MLflow (ex. « prompt diagnostic v3 »)")
+    ap.add_argument("--sans-mlflow", action="store_true")
     args = ap.parse_args()
+    if args.sans_mlflow:
+        os.environ["SANS_MLFLOW"] = "1"
+    suivi_mlflow.demarrer(args.nom or f"eval {datetime.now():%Y-%m-%d %H:%M}")
+    suivi_mlflow.journaliser_config({**config_evaluee(), "jeu": args.jeu, "limite": args.limite, "parallele": args.parallele})
 
     jeux = {
         "nominal": [(sc, [sc[0]], noter_nominal) for sc in NOMINAUX],
@@ -269,7 +311,13 @@ async def main():
     async def un(sc, messages_client, noter, jeu):
         nonlocal fait
         async with sem:
-            r = await jouer(messages_client)
+            with suivi_mlflow.span_scenario(jeu, sc[0], messages_client) as span:
+                r = await jouer(messages_client)
+                if span:
+                    suivi_mlflow.journaliser_etapes(r["tours"])
+                    span.set_outputs({"reponses": [t["reponse"] for t in r["tours"]],
+                                      "phase": r["etat"].get("phase"),
+                                      "option": (r["etat"].get("recommandation") or {}).get("option_recommandee")})
         note = noter(sc, r)
         fait += 1
         print(f"[{fait:2d}/{total}] {jeu:8s} {r['tours'][0]['latence_s']:5.1f} s  {sc[0][:60]}", flush=True)
@@ -287,7 +335,7 @@ async def main():
         resultats[jeu] = await asyncio.gather(*(un(sc, m, f, jeu) for sc, m, f in cas))
     duree = time.perf_counter() - debut
 
-    md, reussi = rapport(resultats, duree)
+    md, reussi, metriques = rapport(resultats, duree)
     dossier = RACINE / "eval" / "resultats"
     dossier.mkdir(exist_ok=True)
     horodatage = datetime.now().strftime("%Y%m%d-%H%M")
@@ -295,7 +343,10 @@ async def main():
     (dossier / "dernier-rapport.md").write_text(md, encoding="utf-8")
     (dossier / f"details-{horodatage}.json").write_text(
         json.dumps(resultats, ensure_ascii=False, indent=1, default=str), encoding="utf-8")
+    run_id = suivi_mlflow.terminer(metriques, reussi, [dossier / f"rapport-{horodatage}.md", dossier / f"details-{horodatage}.json"])
     print("\n" + md)
+    if run_id:
+        print(f"Run MLflow {run_id} : `make mlflow-ui` puis http://localhost:5000")
     sys.exit(0 if reussi else 1)
 
 

@@ -18,6 +18,7 @@ from shared.execution import ResultatAgent, executer_agent
 
 
 async def _ajouter_jeton(requete: httpx.Request) -> None:
+    
     requete.headers.update(entetes_auth(str(requete.url)))
 
 

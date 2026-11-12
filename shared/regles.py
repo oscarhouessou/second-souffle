@@ -138,6 +138,20 @@ def co2_evite(option: str, categorie: str, gamme: str = "inconnue") -> float:
 # ------------------------------------------------------------------------------------------
 # Décision : options chiffrées et recommandation (F13, R01 à R05, R03)
 # ------------------------------------------------------------------------------------------
+def pieces_retenues(reparation: dict | None) -> list:
+    """Pièces de la réparation soi-même : une par défaut, la moins chère, relue dans les données.
+
+    Partagée par la décision (le prix annoncé) et l'action de réservation (le prix réservé) :
+    les deux ne peuvent pas diverger. Deux arceaux proposés pour un arceau cassé ne s'additionnent pas.
+    """
+    par_defaut: dict = {}
+    for x in (reparation or {}).get("pieces", []):
+        p = _par_id(data.pieces(), "part_id", x.get("part_id"))
+        if p and p.difficulte != "atelier" and (p.defaut not in par_defaut or p.prix_eur < par_defaut[p.defaut].prix_eur):
+            par_defaut[p.defaut] = p
+    return list(par_defaut.values())
+
+
 def _par_id(liste, cle, valeur):
     return next((x for x in liste if getattr(x, cle) == valeur), None)
 
@@ -157,14 +171,8 @@ def decider(fiche: FicheDiagnostic, reparation: dict | None, valorisation: dict 
     # --- Réparer -----------------------------------------------------------------------------
     cout_rep = None
     if not est_dangereux(fiche) and not est_securite(cat) and reparation.get("reparable"):
-        pieces = [p for pid in [x.get("part_id") for x in reparation.get("pieces", [])] if (p := _par_id(data.pieces(), "part_id", pid))]
         presta = _par_id(data.prestations(), "service_id", reparation.get("service_id"))
-        # Une seule pièce par défaut : la moins chère (deux arceaux pour un arceau cassé ne s'additionnent pas).
-        par_defaut: dict = {}
-        for p in pieces:
-            if p.difficulte != "atelier" and (p.defaut not in par_defaut or p.prix_eur < par_defaut[p.defaut].prix_eur):
-                par_defaut[p.defaut] = p
-        soi_meme = list(par_defaut.values())
+        soi_meme = pieces_retenues(reparation)
         if soi_meme:
             cout = round(sum(p.prix_eur for p in soi_meme), 2)
             cout_rep = cout

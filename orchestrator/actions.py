@@ -58,9 +58,8 @@ def reserver_atelier(code_postal: str, tool_context: ToolContext, creneau: str =
 
 def reserver_pieces(tool_context: ToolContext) -> dict:
     """Réserve en retrait les pièces de la réparation soi-même, avec leurs tutoriels. Après confirmation explicite."""
-    rep = tool_context.state.get("proposition_reparation") or {}
-    pieces = [p for x in rep.get("pieces", []) if (p := next((d for d in data.pieces() if d.part_id == x.get("part_id")), None))]
-    pieces = [p for p in pieces if p.difficulte != "atelier"]
+    # Même sélection que la décision : le prix réservé est celui qui a été annoncé.
+    pieces = regles.pieces_retenues(tool_context.state.get("proposition_reparation"))
     if not pieces:
         return {"erreur": "aucune pièce à réserver"}
     return _enregistrer(tool_context, {

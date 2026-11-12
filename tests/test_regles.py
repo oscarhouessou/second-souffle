@@ -119,3 +119,15 @@ def test_raison_r04_chiffree_quand_la_revente_l_emporte():
     reco = regles.decider(f, {"reparable": True, "pieces": [{"part_id": "PC-016"}]}, None)
     assert reco.option_recommandee == "revendre"
     assert "seuil" in reco.raison and "7.99" in reco.raison
+
+
+def test_prix_reserve_egal_au_prix_annonce():
+    """Bug trouvé sur Cloud Run : annoncé 9,99 €, réservé 24,98 € (deux arceaux additionnés)."""
+    from types import SimpleNamespace
+
+    from orchestrator.actions import reserver_pieces
+
+    rep = {"reparable": True, "pieces": [{"part_id": "PC-001"}, {"part_id": "PC-003"}]}
+    annonce = next(o for o in regles.decider(fiche(), rep, None).options if o.titre == "Réparer vous-même")
+    ctx = SimpleNamespace(state={"proposition_reparation": rep})
+    assert reserver_pieces(ctx)["total_eur"] == annonce.cout_client_eur == 9.99

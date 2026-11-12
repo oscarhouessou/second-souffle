@@ -85,7 +85,8 @@ make web                                  # http://localhost:8000, choisir « or
 | `make run-local` | Serveur MCP + 4 services A2A (ports 8101 à 8105) + interface ADK |
 | `make conversation` | Parcours de démo en ligne de commande |
 | `make test` | Tests unitaires sans LLM (règles, outils, juge, garde-fous, données) |
-| `make eval` | Jeu d'évaluation complet, rapport dans `eval/resultats/` |
+| `make eval` | Jeu d'évaluation complet, rapport dans `eval/resultats/`, run MLflow |
+| `make mlflow-ui` | Comparer les runs d'évaluation et leurs traces (http://localhost:5000) |
 | `PROJECT=… ./scripts/deploy.sh` | Déploiement Cloud Run (voir plus bas) |
 
 ## Règles métier
@@ -134,6 +135,13 @@ Dernier passage (12 novembre 2026, 65 cas, rapport complet dans `eval/resultats/
 | Escalade quand il le faut | 100 % | ≥ 90 % |
 | Coût moyen par conversation | 0,004 € | ≤ 0,02 € |
 | Latence du premier tour | médiane 5,1 s, **p95 18,7 s** | p95 ≤ 8 s ❌ |
+
+**Suivi des expériences avec MLflow.** Chaque `make eval` crée un run MLflow (`eval/suivi_mlflow.py`) :
+modèle de chaque rôle et version de chaque prompt en paramètres, les critères ci-dessus en métriques,
+une trace par scénario avec un span par étape, le rapport en pièce jointe. On compare ainsi deux
+variantes (`uv run python eval/run_eval.py --nom "diagnostic sur Flash-Lite"`) dans `make mlflow-ui`.
+L'autolog Gemini de MLflow n'est pas utilisé : avec MLflow 3.18 et ADK 2.14, son patch de `google-genai`
+casse les appels d'ADK (réponse `None`). Le détail des appels LLM reste dans Cloud Trace.
 
 Ce que l'évaluation a appris :
 - **Premier passage : 7 critères sur 11.** Tous les échecs venaient du quota Vertex AI (429), pas de la

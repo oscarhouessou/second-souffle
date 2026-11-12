@@ -1,4 +1,4 @@
-.PHONY: install web run-local services test eval eval-rapide conversation data
+.PHONY: install web run-local services test eval eval-rapide mlflow-ui conversation data
 
 install:      ## Crée .venv (Python 3.12) et installe les dépendances
 	uv sync
@@ -20,6 +20,9 @@ eval:         ## Jeu d'évaluation complet (65 cas, section 9) ; rapport dans ev
 
 eval-rapide:  ## Deux cas par jeu, pour vérifier que tout tourne
 	uv run python eval/run_eval.py --limite 2
+
+mlflow-ui:    ## Interface MLflow : comparer les runs d'évaluation et leurs traces (http://localhost:5000)
+	uv run mlflow ui --backend-store-uri sqlite:///mlflow.db --port 5000
 
 conversation: ## Conversation de démo en ligne de commande
 	uv run python scripts/conversation.py "ma tente a un arceau cassé et une petite déchirure, je l'ai depuis 3 ans" "je la répare moi-même" "oui"
