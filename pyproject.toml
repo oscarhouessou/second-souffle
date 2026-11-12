@@ -1,0 +1,21 @@
+[project]
+name = "second-souffle"
+version = "0.1.0"
+description = "Assistant multi-agent (Google ADK + Gemini) pour la seconde vie de l'équipement de sport. Projet de démonstration personnel, données fictives."
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "google-adk>=2.14",
+    "pydantic>=2.7",
+    "python-dotenv>=1.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8",
+    "pytest-cov>=5",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

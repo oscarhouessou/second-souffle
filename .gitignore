@@ -1,0 +1,19 @@
+# Secrets et config locale
+.env
+*.env
+!.env.example
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# ADK (sessions et artefacts locaux)
+.adk/
+
+# macOS
+.DS_Store
