@@ -33,11 +33,11 @@ from google.genai import types
 from diagnostic.agent import root_agent as agent_diagnostic
 from judge.agent import root_agent as agent_juge
 from orchestrator import messages
-from orchestrator.actions import OUTILS_CONSEILLER, garde_confirmation
+from orchestrator.actions import OUTILS_CONSEILLER, garde_confirmation, valider_arguments
 from orchestrator.etapes import AppelSpecialiste, Decision, EtapeSpecialiste, entree_fiche
 from orchestrator.prompts import instruction_conseiller, instruction_redacteur
 from repair.agent import root_agent as agent_reparation
-from shared import regles, usage
+from shared import garde_fous, regles, usage
 from shared.config import MAX_QUESTIONS, SEUIL_CONFIANCE, generation_config, model_for
 from shared.schemas import FicheDiagnostic, PropositionReparation, PropositionValorisation, Recommandation, VerdictJuge
 from valuation.agent import root_agent as agent_valorisation
@@ -61,7 +61,9 @@ def entree_diagnostic(etat: dict, ctx) -> list[types.Part]:
         if not ev.content or not ev.content.parts:
             continue
         if ev.author == "user":
-            lignes.append("Client : " + " ".join(p.text for p in ev.content.parts if p.text))
+            texte_client = " ".join(p.text for p in ev.content.parts if p.text)
+            # Minimisation : e-mail, téléphone, IBAN masqués avant l'envoi au modèle (le code postal reste)
+            lignes.append("Client : " + garde_fous.masquer_donnees_personnelles(texte_client)[0])
             images += [p for p in ev.content.parts if p.inline_data or p.file_data]
         elif ev.author == ctx.agent.name:
             lignes.append("Assistant : " + " ".join(p.text for p in ev.content.parts if p.text))
@@ -135,8 +137,9 @@ conseiller = LlmAgent(
     model=model_for("conseiller"),
     instruction=instruction_conseiller,
     tools=OUTILS_CONSEILLER,
-    before_tool_callback=garde_confirmation,  # R07
-    after_model_callback=usage.compter_usage_callback,
+    before_model_callback=garde_fous.garde_entree_conseiller,  # NF11 : manipulation bloquée avant le modèle
+    before_tool_callback=[valider_arguments, garde_confirmation],  # NF11 + R07
+    after_model_callback=[usage.compter_usage_callback, garde_fous.controle_sortie_conseiller],  # R08
     generate_content_config=generation_config(temperature=0.2),
 )
 
@@ -152,6 +155,16 @@ class Orchestrateur(BaseAgent):
     async def _run_async_impl(self, ctx) -> AsyncGenerator[Event, None]:
         etat = ctx.session.state
         phase = etat.get("phase") or "diagnostic"
+
+        # Garde-fous d'entrée : résultat tracé dans l'état (onglet Events / traces)
+        texte = " ".join(p.text or "" for p in (ctx.user_content.parts if ctx.user_content else []))
+        analyse = garde_fous.analyser_entree(texte)
+        if analyse["injection"] or analyse["donnees_personnelles"]:
+            yield Event(author=self.name, invocation_id=ctx.invocation_id,
+                        actions=EventActions(state_delta={"alertes": [*etat.get("alertes", []), analyse]}))
+        if analyse["model_armor"]:  # Model Armor bloque : on ne transmet rien aux modèles
+            yield self._message(ctx, garde_fous.REFUS_MANIPULATION)
+            return
 
         if usage.budget_depasse(etat.get("usage")):  # NF07
             yield self._message(ctx, messages.budget_atteint())

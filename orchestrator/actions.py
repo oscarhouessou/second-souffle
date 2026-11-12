@@ -163,6 +163,19 @@ def est_confirmation(texte: str) -> bool:
     return bool(_CONFIRMATION.search(texte or "")) and not re.search(r"\b(non|pas encore|attends?)\b", texte or "", re.I)
 
 
+def valider_arguments(tool, args, tool_context: ToolContext):
+    """before_tool_callback (NF11) : arguments vérifiés avant tout appel d'outil."""
+    if "code_postal" in args and not re.fullmatch(r"\d{5}", str(args["code_postal"])):
+        return {"erreur": "code postal invalide : demande au client ses 5 chiffres"}
+    if "date_debut" in args:
+        try:
+            if datetime.fromisoformat(str(args["date_debut"])).date() < datetime.now().date():
+                return {"erreur": "la date de début est passée"}
+        except ValueError:
+            return {"erreur": "date invalide, format attendu AAAA-MM-JJ"}
+    return None
+
+
 def garde_confirmation(tool, args, tool_context: ToolContext):
     """before_tool_callback (R07) : aucune action sans confirmation explicite dans le dernier message du client."""
     if tool.name not in ACTIONS_A_CONFIRMER:
