@@ -51,6 +51,16 @@ class FicheDiagnostic(BaseModel):
     souhait_client: str | None = Field(
         default=None, description="Ce que le client dit vouloir (ex. passer à un vélo électrique), en quelques mots."
     )
+    veut_s_en_separer: bool = Field(
+        default=False,
+        description="Vrai si le client ne compte plus utiliser ce produit (trop petit, changement de pratique, achat d'un autre).",
+    )
+    code_postal: str | None = Field(
+        default=None,
+        pattern=r"^\d{5}$",
+        description="Code postal, uniquement si le client l'a donné (sert à trouver un atelier).",
+    )
+    demande_humain: bool = Field(default=False, description="Vrai si le client demande à parler à un humain.")
     sous_garantie_ou_litige: bool = Field(
         default=False, description="Vrai si le client mentionne une garantie, un achat récent défectueux ou un litige."
     )
