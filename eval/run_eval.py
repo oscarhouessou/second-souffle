@@ -340,7 +340,8 @@ async def main():
     dossier.mkdir(exist_ok=True)
     horodatage = datetime.now().strftime("%Y%m%d-%H%M")
     (dossier / f"rapport-{horodatage}.md").write_text(md, encoding="utf-8")
-    (dossier / "dernier-rapport.md").write_text(md, encoding="utf-8")
+    if args.jeu == "tout" and not args.limite:  # seul un passage complet devient le rapport de référence
+        (dossier / "dernier-rapport.md").write_text(md, encoding="utf-8")
     (dossier / f"details-{horodatage}.json").write_text(
         json.dumps(resultats, ensure_ascii=False, indent=1, default=str), encoding="utf-8")
     run_id = suivi_mlflow.terminer(metriques, reussi, [dossier / f"rapport-{horodatage}.md", dossier / f"details-{horodatage}.json"])
