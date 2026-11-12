@@ -1,0 +1,9 @@
+.venv
+venv
+.env
+.git
+.logs
+.adk
+**/__pycache__
+**/.adk
+eval/resultats

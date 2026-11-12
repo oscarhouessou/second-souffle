@@ -18,9 +18,26 @@ DATA_DIR = Path(os.getenv("SECOND_SOUFFLE_DATA_DIR", ROOT_DIR / "data"))
 DEFAULT_MODEL = os.getenv("SECOND_SOUFFLE_MODEL", "gemini-3.6-flash")
 
 
-def model_for(role: str) -> str:
-    """Modèle d'un rôle : SECOND_SOUFFLE_MODEL_<ROLE> s'il existe, sinon le modèle par défaut."""
+def model_name_for(role: str) -> str:
+    """Nom du modèle d'un rôle : SECOND_SOUFFLE_MODEL_<ROLE> s'il existe, sinon le modèle par défaut."""
     return os.getenv(f"SECOND_SOUFFLE_MODEL_{role.upper()}", DEFAULT_MODEL)
+
+
+def model_for(role: str):
+    """Modèle Gemini d'un rôle, avec nouvelles tentatives sur erreur transitoire (NF04).
+
+    429 (quota) et 503 (surcharge) : 2 nouvelles tentatives au plus, délai exponentiel 1 s puis 2 s,
+    avec un peu d'aléa pour que des appels parallèles ne réessaient pas tous au même instant.
+    """
+    from google.adk.models import Gemini
+    from google.genai import types
+
+    return Gemini(
+        model=model_name_for(role),
+        retry_options=types.HttpRetryOptions(
+            attempts=3, initial_delay=1.0, max_delay=8.0, exp_base=2.0, jitter=0.5, http_status_codes=[429, 503]
+        ),
+    )
 
 
 # Mesuré le 2026-11-12 sur le diagnostic (4 cas) : niveau "minimal" = 2,2 s en moyenne, 4/4 justes ;
